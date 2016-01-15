@@ -94,7 +94,7 @@ def main():
     if sanitize_input(var_l[0]) is False:
         print "invalid input"
         sys.exit(0)
-    print find_path( var_l[0] )
+    print "".join(find_path( var_l[0] ))
     
 
 
