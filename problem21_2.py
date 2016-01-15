@@ -22,6 +22,8 @@ def valid_move( var_frontier , var_m):
     elif var_m == 'S':
         return suck(var_frontier)
     
+def check_config( var_i ):
+    return sum( var_i[:-1]) == 0
 
 def left( var_frontier ):
     var_config, var_move = var_frontier[-1]
@@ -63,9 +65,12 @@ def sanitize_input( var_i ):
        return False
     return True
 
+def find_path( var_c ):
+    return bfs( var_c ):
 
-def check_config( var_i ):
-    return sum( var_i[:-1]) == 0
+def bfs( var_c):
+
+
 
 def main():
     var_l = []
@@ -74,7 +79,9 @@ def main():
     if sanitize_input(var_l[0]) is False:
         print "invalid input"
         sys.exit(0)
-    print check_config(var_l[0])
+    if check_config(var_l[0]):
+        return True
+    
 
 
 if __name__ == "__main__":
