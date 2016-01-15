@@ -49,7 +49,7 @@ def suck( var_frontier ):
     var_config, var_move = var_frontier[-1]
     var_c = copy.copy(var_config)
     if var_c[var_c[-1]] is 1:
-        var_c[-1] -= 1
+        var_c[var_c[-1]] -= 1
         return (var_c, 'S')
     else:
         return ()
@@ -66,9 +66,24 @@ def sanitize_input( var_i ):
     return True
 
 def find_path( var_c ):
-    return bfs( var_c ):
+    return bfs( var_c )
 
-def bfs( var_c):
+def bfs( var_c ):
+    queue = []
+    queue.append( [(list(var_c), "" ) ])
+    while queue:
+        path = queue.pop()
+        node_c, node_m = path[-1]
+        if check_config(node_c):
+            return [ m for _, m in path ]
+        adj =  find_adjacent( path )
+        if len( adj ) is 0:
+            return []
+        else:
+            for a in adj:
+                p = list( path )
+                p.append( a )
+                queue.append( p )
 
 
 
@@ -79,8 +94,7 @@ def main():
     if sanitize_input(var_l[0]) is False:
         print "invalid input"
         sys.exit(0)
-    if check_config(var_l[0]):
-        return True
+    print find_path( var_l[0] )
     
 
 
