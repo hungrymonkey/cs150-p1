@@ -8,44 +8,63 @@ MOVES = ['L','R','S']
 
 def find_adjacent( var_frontier ):
     var_moves = []
+    for var_m in MOVES:
+        var_v = valid_move( var_frontier, var_m)
+        if var_v is not ():
+           var_moves.append( var_v)
+    return var_moves
+
+def valid_move( var_frontier , var_m):
+    if var_m == 'L':
+        return left(var_frontier)
+    elif var_m == 'R':
+        return right(var_frontier)
+    elif var_m == 'S':
+        return suck(var_frontier)
+    
+
+def left( var_frontier ):
     var_config, var_move = var_frontier[-1]
     var_f = [ f for f, m in var_frontier ]
-    for var_m in MOVES:
-        if var_m == 'L':
-            try: 
-                var_c = copy.copy(var_config)
-                var_c[var_config[-1]-1] 
-                var_c[-1] -= 1 
-                if var_c not in var_f:
-                   var_moves.append((var_c, 'L'))
-            except IndexError:
-        elif var_m == 'R':
-            var_c = copy.copy(var_config)
-            if var_c[-1]+1 >= len(var_c) - 1:
-                var_c[-1] += 1 
-                if var_c not in var_f:
-                   var_moves.append((var_c, 'R'))
-        elif var_m == 'S':
-            var_c = copy.copy(var_config)
-            if var_c[var_config[-1]] is 1:
-               var_c[var_config[-1]] -= 1
-               var_moves.append((var_c, 'S'))
-    return var_moves
-       
-        
-    
+    var_c = copy.copy(var_config)
+    var_c[-1] -= 1 
+    if inBounds( var_c ):
+       if var_c not in var_f:
+            return ( var_c, 'L' )
+    return ()
+
+def right( var_frontier ):
+    var_config, var_move = var_frontier[-1]
+    var_f = [ f for f, m in var_frontier ]
+    var_c = copy.copy(var_config)
+    var_c[-1] += 1 
+    if inBounds( var_c ):
+        if var_c not in var_f:
+             return ( var_c, 'R')
+    return ()
+
+def suck( var_frontier ):
+    var_config, var_move = var_frontier[-1]
+    var_c = copy.copy(var_config)
+    if var_c[var_c[-1]] is 1:
+        var_c[-1] -= 1
+        return (var_c, 'S')
+    else:
+        return ()
+
+def inBounds( var_c ):
+    return var_c[-1] in range(0, len(var_c)-1)
     
 
 def sanitize_input( var_i ):
+    if inBounds( var_i ) is False:
+       return False
     if all( 0 <= i <= 1 for i in var_i[:-1]) is False:
        return False
     return True
 
 
 def check_config( var_i ):
-    inital_config = var_i[len(var_i)-1]
-    if len(var_i) - 1 <= inital_config:
-       return False
     return sum( var_i[:-1]) == 0
 
 def main():
