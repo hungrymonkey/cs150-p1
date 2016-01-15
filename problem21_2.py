@@ -1,10 +1,39 @@
 """ Pylint told me I should add an doc String"""
 import csv
 import sys
+import copy
 
 
-def find_adjacent( var_in ):
-    var_frontier, var_move = var_in
+MOVES = ['L','R','S']
+
+def find_adjacent( var_frontier ):
+    var_moves = []
+    var_config, var_move = var_frontier[-1]
+    var_f = [ f for f, m in var_frontier ]
+    for var_m in MOVES:
+        if var_m == 'L':
+            try: 
+                var_c = copy.copy(var_config)
+                var_c[var_config[-1]-1] 
+                var_c[-1] -= 1 
+                if var_c not in var_f:
+                   var_moves.append((var_c, 'L'))
+            except IndexError:
+        elif var_m == 'R':
+            var_c = copy.copy(var_config)
+            if var_c[-1]+1 >= len(var_c) - 1:
+                var_c[-1] += 1 
+                if var_c not in var_f:
+                   var_moves.append((var_c, 'R'))
+        elif var_m == 'S':
+            var_c = copy.copy(var_config)
+            if var_c[var_config[-1]] is 1:
+               var_c[var_config[-1]] -= 1
+               var_moves.append((var_c, 'S'))
+    return var_moves
+       
+        
+    
     
 
 def sanitize_input( var_i ):
