@@ -2,6 +2,11 @@
 import csv
 import sys
 
+
+def find_adjacent( var_in ):
+    var_frontier, var_move = var_in
+    
+
 def sanitize_input( var_i ):
     if all( 0 <= i <= 1 for i in var_i[:-1]) is False:
        return False
