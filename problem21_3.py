@@ -71,20 +71,20 @@ def find_path( var_c ):
 
 def dfs( var_c ):
     stack = []
+    path = []
     stack.append( (list(var_c), "" ) )
     while stack:
         node_c, node_m = stack.pop()
+        path.append( (node_c, node_m))
         if check_config(node_c):
-            stack.append( node_c, node_m)
-            return [ m for _, m in stack ]
-        adj =  find_adjacent( stack )
-        if not adj and not stack:
-            return []
+            return [ m for _, m in path ]
+        adj =  find_adjacent( path )
+        if not adj:
+            path.pop()
         else:
-            for a in adj:
-                p = list( path )
-                p.append( a )
-                stack.append(  p )
+            for a in reversed(adj):
+                stack.append(  a )
+    return []
 
 
 def bfs( var_c ):
