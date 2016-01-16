@@ -66,7 +66,7 @@ def bfs( var_c ):
         path = queue.pop()
         node_c, node_m = path[-1]
         if check_config(node_c):
-            return [ m for _, m in path ][1:]
+            return [ m for _, m in path ]
         adj =  find_adjacent( path )
         if not adj and not queue:
             return []
