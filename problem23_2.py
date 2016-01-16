@@ -4,7 +4,7 @@ import sys
 import copy
 import collections
 import operator
-MOVES = {'L': [0,-1],'U': [-1,0],'R': [0,1],'D': [0,-1],'S': [0,0]}
+MOVES = {'L': [0,-1],'U': [-1,0],'R': [0,1],'D': [1,0],'S': [0,0]}
 
 def find_adjacent( var_frontier ):
     var_moves = []
@@ -45,11 +45,7 @@ def suck( var_frontier ):
 
 def inBounds( var_c ):
     coord = var_c[-1]
-    try:
-         a = var_c[:-1][coord[0]][coord[1]]
-         return True
-    except IndexError:
-         return False
+    return coord[0] in range(0, len(var_c)-1) and coord[1] in range(0, len(var_c[0]))
     
 
 def sanitize_input( var_i ):
