@@ -27,7 +27,6 @@ def move( var_frontier, var_m ):
     var_config, var_move = var_frontier[-1]
     var_f = [ f for f, m in var_frontier ]
     var_c = copy.deepcopy(var_config)
-    print var_c[-1]
     var_c[-1][0] += MOVES[var_m][0]
     var_c[-1][1] += MOVES[var_m][1]
     if inBounds( var_c ):
@@ -75,7 +74,7 @@ def bfs( var_c ):
             for a in adj:
                 p = copy.deepcopy( path )
                 p.append( a )
-                queue.append( p )
+                queue.insert( 0, p )
 
 
 
