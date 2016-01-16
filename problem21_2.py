@@ -83,7 +83,7 @@ def bfs( var_c ):
             for a in adj:
                 p = list( path )
                 p.append( a )
-                queue.append( p )
+                queue.insert( 0, p )
 
 
 
