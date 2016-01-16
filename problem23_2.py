@@ -5,10 +5,11 @@ import copy
 import collections
 import operator
 MOVES = {'L': [0,-1],'U': [-1,0],'R': [0,1],'D': [1,0],'S': [0,0]}
+MOVE = ['L','U','R','D','S']
 
 def find_adjacent( var_frontier ):
     var_moves = []
-    for var_m in MOVES.keys():
+    for var_m in MOVE:
         var_v = valid_move( var_frontier, var_m)
         if var_v is not ():
            var_moves.append( var_v)
