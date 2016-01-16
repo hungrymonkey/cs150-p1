@@ -72,7 +72,7 @@ def bfs( var_c ):
             return []
         else:
             for a in adj:
-                p = copy.deepcopy( path )
+                p = list( path )
                 p.append( a )
                 queue.insert( 0, p )
 
