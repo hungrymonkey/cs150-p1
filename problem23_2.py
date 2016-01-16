@@ -26,8 +26,10 @@ def check_config( var_i ):
 def move( var_frontier, var_m ):
     var_config, var_move = var_frontier[-1]
     var_f = [ f for f, m in var_frontier ]
-    var_c = copy.copy(var_config)
-    var_c[-1] = map( operator.add, var_c[-1], MOVES[var_m] )
+    var_c = copy.deepcopy(var_config)
+    print var_c[-1]
+    var_c[-1][0] += MOVES[var_m][0]
+    var_c[-1][1] += MOVES[var_m][1]
     if inBounds( var_c ):
        if var_c not in var_f:
             return ( var_c, var_m )
@@ -36,7 +38,7 @@ def move( var_frontier, var_m ):
 
 def suck( var_frontier ):
     var_config, var_move = var_frontier[-1]
-    var_c = copy.copy(var_config)
+    var_c = copy.deepcopy(var_config)
     if var_c[var_c[-1][0]][var_c[-1][1]] is 1:
         var_c[var_c[-1][0]][var_c[-1][1]] -= 1
         return (var_c, 'S')
@@ -60,7 +62,7 @@ def find_path( var_c ):
 
 def bfs( var_c ):
     queue = []
-    queue.append( [(list(var_c), "" ) ])
+    queue.append( [(copy.deepcopy(var_c), "" ) ])
     while queue:
         path = queue.pop()
         node_c, node_m = path[-1]
@@ -71,7 +73,7 @@ def bfs( var_c ):
             return []
         else:
             for a in adj:
-                p = list( path )
+                p = copy.deepcopy( path )
                 p.append( a )
                 queue.append( p )
 
