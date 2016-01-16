@@ -76,6 +76,22 @@ def bfs( var_c ):
                 p.append( a )
                 queue.insert( 0, p )
 
+def dfs( var_c ):
+    stack = []
+    path = []
+    stack.append( (copy.deepcopy(var_c), "" ) )
+    while stack:
+        node_c, node_m = stack.pop()
+        path.append( (node_c, node_m))
+        if check_config(node_c):
+            return [ m for _, m in path ]
+        adj =  find_adjacent( path )
+        if not adj:
+            path.pop()
+        else:
+            for a in reversed(adj):
+                stack.append(  a )
+    return []
 
 
 def main():
