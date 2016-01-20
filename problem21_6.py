@@ -75,7 +75,7 @@ def find_path( var_c ):
 
 def a_star( var_c ):
     open_set = Queue.PriorityQueue()
-    closed_set = []
+    closed_set = set()
     came_from = dict{str(var_c): ()}
     open_set.put((0,0,(var_c, "")))
     g_score = {str(var_c): 0}
@@ -85,12 +85,12 @@ def a_star( var_c ):
        curr_g, curr_f, config = pq.get()
        curr_c, curr_m = config
        if check_config( curr_c ):
-           return reconstruct_path( config )
-       closed_set.append( str( curr_c ))
+           return reconstruct_path( config, came_from )
+       closed_set.add( str( curr_c ))
        adj =  find_adjacent( [config] )
        for n in adj:
           c, m = n
-          if c in closed_set:
+          if str(c) in closed_set:
              continue
           tentative_g = g_score[str(curr_c)] + 1
           if c not in open_set
@@ -107,7 +107,12 @@ def a_star( var_c ):
        
     
 def reconstruct_parth( var_i, came_from ):
-    return []
+    path = []
+    c, m = var_i:
+    while came[str(c)] is not ():
+        c, m = came[str(c)]
+        path.append( m )
+    return reversed(path)
     
 
 def dfs( var_c ):
