@@ -73,46 +73,41 @@ def sanitize_input( var_i ):
 def find_path( var_c ):
     return a_star( var_c )
 
+def reconstruct_path( var_i, came_from ):
+    path = []
+    c, m = var_i
+    if m is not "":
+       path.append( m)
+    while came_from[str(c)] is not ():
+        c, m = came_from[str(c)]
+        path.append( m )
+    return reversed(path)
+
 def a_star( var_c ):
     open_set = Queue.PriorityQueue()
-    closed_set = set()
-    came_from = dict{str(var_c): ()}
+    came_from = { str(var_c) : () }
     open_set.put((0,0,(var_c, "")))
-    g_score = {str(var_c): 0}
-    f_score = {str(var_c): heuristic_cost( var_c )}
-    counter = 1
+    g_score = { str(var_c): 0 }
+    f_score = { str(var_c): heuristic_cost( var_c ) }
+    counter = 0
     while open_set:
-       curr_g, curr_f, config = pq.get()
+       curr_g, curr_f, config = open_set.get()
        curr_c, curr_m = config
        if check_config( curr_c ):
            return reconstruct_path( config, came_from )
-       closed_set.add( str( curr_c ))
        adj =  find_adjacent( [config] )
        for n in adj:
           c, m = n
-          if str(c) in closed_set:
-             continue
           tentative_g = g_score[str(curr_c)] + 1
-          if c not in open_set
-               open_set.put( (g, counter, n))
+          if str(c ) not in g_score or tentative_g < g_score[str(c)]:
+               g_score[str(c)] = tentative_g
                counter += 1
-          elif tentative_g >= g_score[str(c)]
-               continue
-          came_from[str(c)] = config
-          g_score[str(c)] = tentative_g
-          f_score[str(c)] = tentative_g + heuristic_cost( c )
-              
-             
+               priority = tentative_g + heuristic_cost( c )
+               open_set.put( (priority, counter, n) ) 
+               came_from[str(c)] = config
     return []
        
     
-def reconstruct_parth( var_i, came_from ):
-    path = []
-    c, m = var_i:
-    while came[str(c)] is not ():
-        c, m = came[str(c)]
-        path.append( m )
-    return reversed(path)
     
 
 def dfs( var_c ):
