@@ -1,4 +1,5 @@
 """ Pylint told me I should add an doc String"""
+import Queue
 import csv
 import sys
 import copy
@@ -97,7 +98,7 @@ def a_star( var_c ):
 
 
 def find_path( var_c ):
-    return dls( var_c, DEPTH )
+    return a_star( var_c )
 
 def bfs( var_c ):
     queue = []
