@@ -70,7 +70,7 @@ def find_path( var_c ):
     return iddfs( var_c )
 
 def iddfs(var_c):
-    for i in range(1,8):
+    for i in range(1,9):
         dls_return = dls(var_c, i)
         if len(dls_return) is not 0:
             return dls_return

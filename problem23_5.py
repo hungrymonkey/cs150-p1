@@ -79,7 +79,7 @@ def bfs( var_c ):
                 queue.insert( 0, p )
 
 def iddfs(var_c):
-    for i in range(1,10):
+    for i in range(1,11):
         dls_return = dls(var_c, i)
         if len(dls_return) is not 0:
             return dls_return
