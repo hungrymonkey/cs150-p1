@@ -80,27 +80,39 @@ def bfs( var_c ):
 
 def iddfs(var_c):
     for i in range(1,10):
-        dls_return = dls(var_c, i)    
-        if dls_return(i) != []
+        dls_return = dls(var_c, i)
+        if len(dls_return) is not 0:
             return dls_return
     return []        
 
+def check_visited_neighbors( adj, visited ):
+    l = []
+    for a in adj:
+        n, _ = a
+        if not visited[str(n)]:
+            l.append( a )
+    return l
 
 def dls( var_c, depth ):
     stack = []
     path = []
-    stack.append( (copy.deepcopy(var_c), "" ) )
+    stack.append( ((copy.deepcopy(var_c), "" ),0) )
+    visited =  collections.defaultdict( bool )
     while stack:
-        node_c, node_m = stack.pop()
-        path.append( (node_c, node_m))
+        n, d = stack.pop()
+        node_c, node_m = n
+        path = path[:d]
+        path.append( n )
+        visited[str(node_c)] = True
         if check_config(node_c):
             return [ m for _, m in path ]
         adj = find_adjacent( path )
-        if not adj or len(path) == depth:
+        ad = check_visited_neighbors(adj, visited)
+        if not ad or d >= depth - 1:
             path.pop()
         else:
-            for a in reversed(adj):
-                stack.append(  a )
+            for a in reversed(ad):
+                 stack.append(  (a,d+1) )
     return []
 
 
