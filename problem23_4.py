@@ -78,21 +78,35 @@ def bfs( var_c ):
                 p.append( a )
                 queue.insert( 0, p )
 
+def check_neighbors( adj, visited ):
+    count = 0
+    if len(adj) == 0:
+        return True
+    for a in adj:
+        n, _ = a
+        if n not in visited:
+            count+=1
+    return count == 0
+
 def dls( var_c, depth ):
     stack = []
     path = []
-    stack.append( (copy.deepcopy(var_c), "" ) )
+    stack.append( ((copy.deepcopy(var_c), "" ),0) )
+    visited = []
     while stack:
-        node_c, node_m = stack.pop()
-        path.append( (node_c, node_m))
+        n, d = stack.pop()
+        node_c, node_m = n
+        path = path[:d]
+        path.append( n )
+        visited.append( copy.deepcopy( node_c ))
         if check_config(node_c):
             return [ m for _, m in path ]
         adj = find_adjacent( path )
-        if not adj or len(path) == depth:
+        if check_neighbors(adj, visited) or d >= depth - 1:
             path.pop()
         else:
             for a in reversed(adj):
-                stack.append(  a )
+                 stack.append(  (a,d+1) )
     return []
 
 
