@@ -2,7 +2,7 @@
 import csv
 import sys
 import copy
-
+import collections
 
 MOVES = ['L','R','S']
 
@@ -68,22 +68,34 @@ def sanitize_input( var_i ):
 def find_path( var_c ):
     return dfs( var_c )
 
+def check_visited_neighbors( adj, visited ):
+    l = []
+    for a in adj:
+        n, _ = a
+        if not visited[str(n)]:
+            l.append( a )
+    return l
 
 def dfs( var_c ):
     stack = []
     path = []
-    stack.append( (list(var_c), "" ) )
+    stack.append( ((copy.deepcopy(var_c), "" ),0) )
+    visited =  collections.defaultdict( bool )
     while stack:
-        node_c, node_m = stack.pop()
-        path.append( (node_c, node_m))
+        n, d = stack.pop()
+        node_c, node_m = n
+        path = path[:d]
+        path.append( n )
+        visited[str(node_c)] = True
         if check_config(node_c):
             return [ m for _, m in path ]
-        adj =  find_adjacent( path )
-        if not adj:
+        adj = find_adjacent( path )
+        ad = check_visited_neighbors(adj, visited)
+        if not ad:
             path.pop()
         else:
-            for a in reversed(adj):
-                stack.append(  a )
+            for a in reversed(ad):
+                 stack.append(  (a,d+1) )
     return []
 
 
