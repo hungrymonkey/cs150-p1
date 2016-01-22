@@ -108,12 +108,12 @@ def dls( var_c, depth ):
             return [ m for _, m in path ]
         adj = find_adjacent( path )
         ad = check_visited_neighbors(adj, visited)
-        if not ad or d >= depth - 1:
+        if not ad or d >= depth:
             path.pop()
         else:
             for a in reversed(ad):
                  stack.append(  (a,d+1) )
-    return []
+    return list("None")
 
 
 def main():

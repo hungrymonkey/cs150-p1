@@ -70,7 +70,7 @@ def bfs( var_c ):
             return [ m for _, m in path ]
         adj =  find_adjacent( path )
         if not adj and not queue:
-            return []
+            return list("None")
         else:
             for a in adj:
                 p = list( path )

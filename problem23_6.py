@@ -95,7 +95,7 @@ def a_star( var_c ):
                priority = tentative_g + heuristic_cost( c )
                open_set.put( (priority, counter, n) ) 
                came_from[str(c)] = config
-    return []
+    return list("None")
        
 
 

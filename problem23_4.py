@@ -106,7 +106,7 @@ def dls( var_c, depth ):
         else:
             for a in reversed(ad):
                  stack.append(  (a,d+1) )
-    return []
+    return list("None")
 
 
 def main():
