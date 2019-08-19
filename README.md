@@ -2,7 +2,9 @@
 
 ## Problem
 
-We are given a room with debris and need to find the least possible moves until the room is clean
+We are given a room with debris and need to find the least possible moves until the room is clean.
+
+Possible Moves include Left, Right, Up, Down, and Suck.
 
 ## Solution
 
