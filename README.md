@@ -6,7 +6,7 @@ We are given a room with debris and need to find the least possible moves until 
 
 ## Solution
 
-This problem is just another tree walk application.
+This problem uses various tree walks.
 
 Solutions Used
 
